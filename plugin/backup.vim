@@ -5,8 +5,7 @@
 " TODO
 function LintEastwood()
     let ns = fireplace#ns()
-    echom ns
-    return ''
+    return ns
 endfunction
 
 function RequireEastwood()
@@ -27,4 +26,9 @@ function TryToPrint()
     catch /^Clojure:.*/
         return ''
     endtry
+endfunction
+
+function g:ExecEastwood()
+    let ns = LintEastwood()
+    exec "!bash /Users/david/Code/vim-eastwood/vimeastwood/eastwood.sh " . ns 
 endfunction

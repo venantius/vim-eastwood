@@ -15,20 +15,19 @@ let g:loaded_syntastic_clojure_eastwood_checker = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-" THIS STILL NEEDS DOING:
-
 function! SyntaxCheckers_clojure_eastwood_GetLocList() dict
     let makeprg = self.makeprgBuild({})
 
     let errorformat = '%f:%l:%c: %m'
 
     let env = syntastic#util#isRunningWindows() ? {} : { 'TERM': 'dumb' }
+    echom makeprg()
+    echom "FUCKS"
 
     let loclist = SyntasticMake({
         \ 'makeprg': makeprg,
         \ 'errorformat': errorformat,
-        \ 'env': env,
-        \ 'subtype': 'Style' })
+        \ 'subtype': 'Lint' })
 
     for e in loclist
         let e['type'] = e['text'] =~? '^W' ? 'W' : 'E'
@@ -41,10 +40,10 @@ endfunction
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'clojure',
+    \ 'exec': '/Users/david/Code/vim-eastwood/vimeastwood/eastwood.sh',
     \ 'name': 'eastwood'})
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
-" TODO: I don't know what this is
 " vim: set sw=4 sts=4 et fdm=marker:
