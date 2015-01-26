@@ -15,32 +15,49 @@ let g:loaded_syntastic_clojure_eastwood_checker = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-function! SyntaxCheckers_clojure_eastwood_GetLocList() dict
-    let makeprg = self.makeprgBuild({})
+" TODO:
+function! SyntaxCheckers_clojure_eastwood_IsAvailable() dict
+    return 1
+endfunction
 
+function! SyntaxCheckers_clojure_eastwood_GetLocList() dict
     let errorformat = '%f:%l:%c: %m'
 
     let env = syntastic#util#isRunningWindows() ? {} : { 'TERM': 'dumb' }
-    echom makeprg()
-    echom "FUCKS"
+    
+    call g:EastwoodRequire()
+    redir => eastwood_output
+    call g:EastwoodLintNS()
+    redir end
+    let result_array = split(eastwood_output, "\n")[1:]
+    let loclist = []
 
-    let loclist = SyntasticMake({
-        \ 'makeprg': makeprg,
-        \ 'errorformat': errorformat,
-        \ 'subtype': 'Lint' })
+    for message in result_array
+        echom message
+        let filename_idx = match(message, ":", 0, 1)
+        let filename = message[0 : filename_idx - 1]
 
-    for e in loclist
-        let e['type'] = e['text'] =~? '^W' ? 'W' : 'E'
+        let line_idx = match(message, ":", 0, 2)
+        let line = message[filename_idx + 1 : line_idx - 1]
+
+        let column_idx = match(message, ":", 0, 3)
+        let column = message[line_idx + 1 : column_idx - 1]
+        let msg = message[column_idx + 1 : ]
+
+        echom message
+        echom filename
+        echom line
+        echom column
+        echom msg
     endfor
 
-    return loclist
+    return []
 endfunction
 
 " NOTE: DONE AFTER THIS
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'clojure',
-    \ 'exec': '/Users/david/Code/vim-eastwood/vimeastwood/eastwood.sh',
     \ 'name': 'eastwood'})
 
 let &cpo = s:save_cpo
