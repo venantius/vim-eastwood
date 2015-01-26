@@ -1,7 +1,7 @@
 # vim-eastwood
 
 
-vim-eastwood is a vim plugin for [Eastwood](https://github.com/jonase/eastwood/), the Clojure lint tool. Rather than shelling out to Leiningen, it uses a [vim-fireplace](https://github.com/tpope/vim-fireplace/) REPL connection to only lint the current file. This has the advantage of sidestepping Leiningen's startup time and keeping Vim from hanging, though the very first time you use it with a given REPL server, there will be a slight delay as it loads the `eastwood.lint` namespace.
+vim-eastwood is a vim plugin for [Eastwood](https://github.com/jonase/eastwood/), the Clojure lint tool. Rather than shelling out to Leiningen, it uses a [vim-fireplace](https://github.com/tpope/vim-fireplace/) REPL connection to only lint the current file. This has the advantage of sidestepping Leiningen's startup time and keeping Vim from hanging, though the very first time you use it with a given REPL server there will be a slight delay as it loads the `eastwood.lint` namespace.
 
 It extends [Syntastic](https://github.com/scrooloose/syntastic)'s checkers, so you'll see those familiar markers in your UI:
 
@@ -13,7 +13,7 @@ It extends [Syntastic](https://github.com/scrooloose/syntastic)'s checkers, so y
 
 You'll want to have [Eastwood](https://github.com/jonase/eastwood/), [vim-fireplace](https://github.com/tpope/vim-fireplace/) and [Syntastic](https://github.com/scrooloose/syntastic) installed, and you'll need to make sure Eastwood is somewhere on the Leiningen classpath. 
 
-In order for Syntastic to actually try to lint the file you're working on, you'll also need to have a REPL connection open through fireplace.
+In order for Syntastic to actually lint the file you're working on, you'll also need to have a REPL connection open through fireplace.
 
 After that, the rest should take care of itself.
 
@@ -35,6 +35,6 @@ Bundle 'venantius/vim-eastwood'
 
 ## License
 
-Copyright (c) W. David Jarvis.
+Copyright (c) 2015 W. David Jarvis.
 
 Licensed under the Eclipse Public License, the same as Clojure.
