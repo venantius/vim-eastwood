@@ -15,9 +15,14 @@ let g:loaded_syntastic_clojure_eastwood_checker = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-" TODO:
+" Try to require 'eastwood.lint
 function! SyntaxCheckers_clojure_eastwood_IsAvailable() dict
-    return 1
+    try
+        call g:EastwoodRequire()
+        return 1
+    catch
+        return 0
+    endtry
 endfunction
 
 function! SyntaxCheckers_clojure_eastwood_GetLocList() dict
@@ -25,7 +30,6 @@ function! SyntaxCheckers_clojure_eastwood_GetLocList() dict
 
     let env = syntastic#util#isRunningWindows() ? {} : { 'TERM': 'dumb' }
     
-    call g:EastwoodRequire()
     redir => eastwood_output
     call g:EastwoodLintNS()
     redir end
@@ -33,7 +37,7 @@ function! SyntaxCheckers_clojure_eastwood_GetLocList() dict
     let loclist = []
 
     for message in result_array
-        echom message
+        let error = {}
         let filename_idx = match(message, ":", 0, 1)
         let filename = message[0 : filename_idx - 1]
 
@@ -44,17 +48,17 @@ function! SyntaxCheckers_clojure_eastwood_GetLocList() dict
         let column = message[line_idx + 1 : column_idx - 1]
         let msg = message[column_idx + 1 : ]
 
-        echom message
-        echom filename
-        echom line
-        echom column
-        echom msg
+        let error.text = msg
+        let error.lnum = line
+        let error.col = column
+        let error.valid = 1
+        let error.type = "E"
+        let error.bufnr = bufnr('%')
+        call add(loclist, error)
     endfor
 
-    return []
+    return loclist
 endfunction
-
-" NOTE: DONE AFTER THIS
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'clojure',

@@ -1,6 +1,6 @@
-" eastwood.vim - Clojure linting and code cleanup
-" Maintainer:   Venantius <http://venanti.us>
-" Version:      0.1
+" eastwood.vim - Clojure linting and code cleanup plugin
+" Maintainer:   Venantius <venantius at gmail dot com>
+" Version:      0.2
 
 if exists('g:syntastic_extra_filetypes')
     call add(g:syntastic_extra_filetypes, 'clojure')
