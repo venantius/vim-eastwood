@@ -3,6 +3,8 @@
 
 vim-eastwood is a vim plugin for [Eastwood](https://github.com/jonase/eastwood/), the Clojure lint tool. Rather than shelling out to Leiningen, it uses a [vim-fireplace](https://github.com/tpope/vim-fireplace/) REPL connection to only lint the current file. This has the advantage of sidestepping Leiningen's startup time and keeping Vim from hanging, though the very first time you use it with a given REPL server there will be a slight delay as it loads the `eastwood.lint` namespace.
 
+You should be aware of the side effects of [using Eastwood from a REPL](https://github.com/jonase/eastwood#running-eastwood-in-a-repl).
+
 It extends [Syntastic](https://github.com/scrooloose/syntastic)'s checkers, so you'll see those familiar markers in your UI:
 
 ![](doc/demo.png)
