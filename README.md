@@ -25,7 +25,7 @@ Assuming you already have [Pathogen](https://github.com/tpope/vim-pathogen) inst
 
 ```
 cd ~/.vim/bundle && \
-git clone https://github.com/scrooloose/syntasÂtic.git
+git clone https://github.com/scrooloose/syntastic.git
 ```
 
 ### Installing with Vundle
