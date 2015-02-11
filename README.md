@@ -13,7 +13,11 @@ It extends [Syntastic](https://github.com/scrooloose/syntastic)'s checkers, so y
 
 ### Requirements
 
-You'll want to have [Eastwood](https://github.com/jonase/eastwood/), [vim-fireplace](https://github.com/tpope/vim-fireplace/) and [Syntastic](https://github.com/scrooloose/syntastic) installed, and you'll need to make sure Eastwood is somewhere on the Leiningen classpath. 
+You'll want to have [Eastwood](https://github.com/jonase/eastwood/), [vim-fireplace](https://github.com/tpope/vim-fireplace/) and [Syntastic](https://github.com/scrooloose/syntastic) installed, and you'll need to make sure Eastwood is somewhere on your project's classpath. I'd recommend adding the following to your `~/.lein/profiles.clj`:
+
+```clojure
+:dependencies [[jonase/eastwood "0.2.1" :exclusions [org.clojure/clojure]]]
+```
 
 In order for Syntastic to actually lint the file you're working on, you'll also need to have a REPL connection open through fireplace.
 
