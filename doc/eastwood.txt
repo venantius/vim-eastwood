@@ -1,0 +1,46 @@
+*eastwood.txt*  Vim plugin for Eastwood, the Clojure lint tool
+*eastwood*
+           _                               _                           _     ~
+          (_)                             | |                         | |    ~
+    __   ___ _ __ ___        ___  __ _ ___| |___      _____   ___   __| |    ~
+    \ \ / / | '_ ` _ \______/ _ \/ _` / __| __\ \ /\ / / _ \ / _ \ / _` |    ~
+     \ V /| | | | | | |____|  __/ (_| \__ \ |_ \ V  V / (_) | (_) | (_| |    ~
+      \_/ |_|_| |_| |_|     \___|\__,_|___/\__| \_/\_/ \___/ \___/ \__,_|    ~
+                                                                             ~
+                                                                             ~
+==============================================================================
+CONTENTS                                                      *vim-eastwood*
+
+   01. Intro .............................................. |eastwood-intro|
+   02. Features ........................................ |eastwood-features|
+   03. Contributions .............................. |eastwood-contributions|
+   04. License .......................................... |eastwood-license|
+
+==============================================================================
+INTRODUCTION                                                *eastwood-intro*
+
+vim-eastwood is a vim plugin for Eastwood, the code linter for Clojure.
+
+Rather than invoking the plugin by shelling out to Leiningen, it uses a 
+vim-fireplace REPL connection to only lint the current file. This has 
+the advantage of sidestepping Leiningen's startup time and keeping Vim 
+from hanging, though the first time you use it with a given REPL server 
+there will be a slight delay as it loads the eastwood.lint namespace.
+
+==============================================================================
+FEATURES                                                 *eastwood-features*
+
+*  Generates quickfix info and feeds it into Syntastic
+*  That's it!
+
+==============================================================================
+CONTRIBUTIONS                                       *eastwood-contributions*
+
+Contributions and pull requests are welcome.
+
+==============================================================================
+LICENSE                                                   *eastwood-license*
+
+EPL License.  Copyright © 2015 W. David Jarvis
+
+ vim:tw=78:ts=8:ft=help:norl:
