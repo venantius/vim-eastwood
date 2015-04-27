@@ -8,7 +8,7 @@ else
     let g:syntastic_extra_filetypes = ['clojure']
 endif
 
-function g:EastwoodRequire()
+function! g:EastwoodRequire()
     let cmd = "(require 'eastwood.lint)"
     try
         call fireplace#session_eval(cmd)
@@ -18,7 +18,7 @@ function g:EastwoodRequire()
     endtry
 endfunction
 
-function EastwoodCallback()
+function! EastwoodCallback()
     return "(fn [x] " . 
           \ " (if (= (:kind x) :lint-warning) " .
           \ "   (let [{:keys [line file column msg] :as x} (:warn-data x)" .
@@ -26,7 +26,7 @@ function EastwoodCallback()
           \ "     (println warning))))"
 endfunction
 
-function g:EastwoodLintNS()
+function! g:EastwoodLintNS()
     let cmd = "(eastwood.lint/eastwood {:namespaces ['" . fireplace#ns() . "] :callback " . EastwoodCallback() . "})"
     try
         silent! call fireplace#session_eval(cmd)
