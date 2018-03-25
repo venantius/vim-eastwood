@@ -18,20 +18,23 @@ function! g:EastwoodRequire()
     endtry
 endfunction
 
-function! EastwoodCallback()
-    return "(fn [x] " . 
-          \ " (if (= (:kind x) :lint-warning) " .
-          \ "   (let [{:keys [line file column msg] :as x} (:warn-data x)" .
-          \ "         warning (clojure.string/join \":\" [file line column msg])]" .
-          \ "     (println warning))))"
-endfunction
+function! g:EastwoodLintNS(...) abort
+    let opts = a:0 ? a:1 : {}
+    let add_linters = exists('opts.add_linters') ? opts.add_linters : []
 
-function! g:EastwoodLintNS()
-    let cmd = "(eastwood.lint/eastwood {:namespaces ['" . fireplace#ns() . "] :callback " . EastwoodCallback() . "})"
+    let cmd = "(->> (eastwood.lint/lint {:namespaces '[" . fireplace#ns() . "] :add-linters [" . join(map(copy(add_linters), '":" . v:val'), " ") ."]})" .
+            \ " :warnings" .
+            \ " (map (fn [e]" .
+            \     "{:text (:msg e)" .
+            \     " :lnum (:line e)"  .
+            \     " :col (:column e)" .
+            \     " :valid true"  .
+            \     " :bufnr " . bufnr('%')  .
+            \     " :type \"E\"})))"
     try
-        silent! call fireplace#session_eval(cmd)
-        return ''
+        let res=fireplace#query(cmd)
+        return res
     catch /^Clojure:.*/
-        return ''
+        return []
     endtry
 endfunction
