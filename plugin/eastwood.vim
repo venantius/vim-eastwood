@@ -22,7 +22,10 @@ function! g:EastwoodLintNS(...) abort
     let opts = a:0 ? a:1 : {}
     let add_linters = exists('opts.add_linters') ? opts.add_linters : []
 
-    let cmd = "(->> (eastwood.lint/lint {:namespaces '[" . fireplace#ns() . "] :add-linters [" . join(map(copy(add_linters), '":" . v:val'), " ") ."]})" .
+    let cmd = "(->> (eastwood.lint/lint { " .
+            \     " :namespaces '[" . fireplace#ns() . "]" .
+            \     " :add-linters [" . join(map(copy(add_linters), '":" . v:val'), " ") ."]" .
+            \ " })" .
             \ " :warnings" .
             \ " (map (fn [e]" .
             \     "{:text (:msg e)" .

@@ -26,6 +26,7 @@ function! SyntaxCheckers_clojure_eastwood_IsAvailable() dict
 endfunction
 
 function! SyntaxCheckers_clojure_eastwood_GetLocList() dict
+    let env = syntastic#util#isRunningWindows() ? {} : { 'TERM': 'dumb'  }
     let opts = {'add_linters': exists('g:eastwood_add_linters') ? g:eastwood_add_linters : []}
     return g:EastwoodLintNS(opts)
 endfunction
