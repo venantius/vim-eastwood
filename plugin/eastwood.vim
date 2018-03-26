@@ -35,6 +35,7 @@ function! g:EastwoodLintNS(...) abort
             \     " :bufnr " . bufnr('%')  .
             \     " :type \"E\"})))"
     try
+        call g:EastwoodRequire() " In case if REPL was restarted
         let res=fireplace#query(cmd)
         return res
     catch /^Clojure:.*/
