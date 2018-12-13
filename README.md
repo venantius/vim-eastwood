@@ -19,6 +19,12 @@ You'll want to have [Eastwood](https://github.com/jonase/eastwood/), [vim-firepl
 :dependencies [[jonase/eastwood "0.2.1" :exclusions [org.clojure/clojure]]]
 ```
 
+You'll also need to enable this plugin as the Clojure syntax checker for Syntastic by adding the following line to your ~/.vimrc:
+
+```vim
+let g:syntastic_clojure_checkers = ['eastwood']
+```
+
 In order for Syntastic to actually lint the file you're working on, you'll also need to have a REPL connection open through fireplace.
 
 After that, the rest should take care of itself.
