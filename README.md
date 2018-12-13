@@ -51,6 +51,6 @@ If you like this, you should check out [vim-cljfmt](https://github.com/venantius
 
 ## License
 
-Copyright (c) 2015 W. David Jarvis.
+Copyright (c) 2019 W. David Jarvis.
 
 Licensed under the Eclipse Public License, the same as Clojure.
