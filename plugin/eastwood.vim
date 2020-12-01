@@ -27,6 +27,7 @@ function! g:EastwoodLintNS(...) abort
             \     " :add-linters [" . join(map(copy(add_linters), '":" . v:val'), " ") ."]" .
             \ " })" .
             \ " :warnings" .
+            \ " (map (some-fn :warn-data identity))" .
             \ " (map (fn [e]" .
             \     "{:text (:msg e)" .
             \     " :lnum (:line e)"  .
